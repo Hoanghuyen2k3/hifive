@@ -25,7 +25,7 @@ const winningLines = (boardSize) => {
     for (let i = 0; i <= boardSize - 3; i++) {
       for (let j = 0; j <= boardSize - 3; j++) {
         lines.push([i * boardSize + j, (i + 1) * boardSize + j + 1, (i + 2) * boardSize + j + 2]);
-        lines.push([i * boardSize + j + 3, (i + 1) * boardSize + j + 2, (i + 2) * boardSize + j + 1]);
+        lines.push([i * boardSize + j + 2, (i + 1) * boardSize + j + 1, (i + 2) * boardSize + j]);
       }
     }
   
@@ -49,6 +49,68 @@ const calculateWinner = (squares, lines) => {
     return winner ? `${winner}` : squares.includes(null) ? null : 'Draw';
   };
 
+function minimax(squares, depth, alpha, beta, isMax, matrix) {
+  const lines = winningLines(matrix);
+  const winner = calculateWinner(squares, lines);
+  if (winner === player){
+    return 10;
+  }
+  if (winner === opponent){
+      return -10;
+  }
+  if (winner === "Draw"){
+      return 0;
+  }
+
+  if (isMax) {
+      let best = -100;
+      for (let i = 0; i < squares.length; i++) {
+          if (squares[i] === null) {
+              squares[i] = player;
+              best = Math.max(best, minimax(squares, depth + 1, alpha, beta, !isMax));
+              squares[i] = null;
+              alpha = Math.max(alpha, best);
+              if (beta <= alpha) break; // Beta pruning
+          }
+      }
+      return best;
+  } else {
+      let best = 100;
+      for (let i = 0; i < squares.length; i++) {
+          if (squares[i] === null) {
+              squares[i] = opponent;
+              best = Math.min(best, minimax(squares, depth + 1, alpha, beta, !isMax));
+              squares[i] = null;
+              beta = Math.min(beta, best);
+              if (beta <= alpha) break; // Alpha pruning
+          }
+      }
+      return best;
+  }
+}
+
+function findBestMove(squares, matrix) {
+  let bestVal = -100;
+  let bestMove = -1;
+  let alpha = -100;
+  let beta = 100;
+
+  for (let i = 0; i < squares.length; i++) {
+      if (squares[i] === null) {
+          squares[i] = player;
+
+          let moveVal = minimax(squares, 0, alpha, beta, false, matrix);
+          squares[i] = null;
+          if (moveVal > bestVal) {
+              bestVal = moveVal;
+              bestMove = i;
+          }
+      }
+  }
+
+  return bestMove;
+}
+
 
 
 function Tictactoe() {
@@ -66,7 +128,8 @@ function Tictactoe() {
     }, [matrix]);
 
     const currentSquares = history[stepNumber];
-    let lines = winningLines(matrix)
+    let lines = winningLines(matrix);
+    console.log(lines);
 
     const winner = calculateWinner(currentSquares, lines);
   
@@ -74,12 +137,11 @@ function Tictactoe() {
       if (!xIsNext) {
         const timeout = setTimeout(() => {
           makeAIMove();
-        }, 500);
+        }, 1000);
         return () => clearTimeout(timeout);
       }
     }, [xIsNext, currentSquares]);
 
-    
   
     const makeAIMove = () => {
       if (winner || currentSquares.every((square) => square !== null)) {
@@ -93,7 +155,7 @@ function Tictactoe() {
   
     //   const bestMove = getBestMove(squares, xIsNext ? 'O' : 'X');
       // let bestMove = findBestMove(squares);
-      let bestMove = findBestMove(squares);
+      let bestMove = findBestMove(squares, matrix);
       console.log("Best move for 'O':", bestMove);
       
       console.log("bestMove: ", bestMove);
@@ -119,75 +181,10 @@ function Tictactoe() {
       setXIsNext(!xIsNext);
     };
 
-    function minimax(squares, depth, alpha, beta, maximizingPlayer) {
-      if (winner === player){
-        return 10;
-      }
-      if (winner === opponent){
-          return -10;
-      }
-      if (winner === "Draw"){
-          return 0;
-      }
+    
   
-      if (maximizingPlayer) {
-          let best = -Infinity;
-          for (let i = 0; i < squares.length; i++) {
-              if (squares[i] === null) {
-                  squares[i] = player;
-                  best = Math.max(best, minimax(squares, depth + 1, alpha, beta, !maximizingPlayer));
-                  squares[i] = null;
-                  alpha = Math.max(alpha, best);
-                  if (beta <= alpha) break; // Beta pruning
-              }
-          }
-          return best;
-      } else {
-          let best = Infinity;
-          for (let i = 0; i < squares.length; i++) {
-              if (squares[i] === null) {
-                  squares[i] = opponent;
-                  best = Math.min(best, minimax(squares, depth + 1, alpha, beta, !maximizingPlayer));
-                  squares[i] = null;
-                  beta = Math.min(beta, best);
-                  if (beta <= alpha) break; // Alpha pruning
-              }
-          }
-          return best;
-      }
-  }
   
-  function findBestMove(squares) {
-      let bestVal = -Infinity;
-      let bestMove = -1;
-      let alpha = -Infinity;
-      let beta = Infinity;
-  
-      for (let i = 0; i < squares.length; i++) {
-          if (squares[i] === null) {
-              squares[i] = player;
-  
-              let moveVal = minimax(squares, 0, alpha, beta, false);
-              squares[i] = null;
-              if (moveVal > bestVal) {
-                  bestVal = moveVal;
-                  bestMove = i;
-              }
-          }
-      }
-  
-      return bestMove;
-  }
    
-  
-    const getBestMove = (squares, player) => {
-      
-      for (let i = 0; i < squares.length; i++) {
-        if (squares[i] === null) {
-          return i;
-        }
-      }
-    };
     
     const restartGame = () => {
         setInitialBoard(Array(matrix * matrix).fill(null));
