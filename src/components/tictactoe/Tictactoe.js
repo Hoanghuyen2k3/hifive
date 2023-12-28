@@ -61,16 +61,21 @@ function minimax(squares, depth, alpha, beta, isMax, matrix) {
   if (winner === "Draw"){
       return 0;
   }
+  if (depth === 0) {
+    return 0;
+
+  }
+
 
   if (isMax) {
       let best = -100;
       for (let i = 0; i < squares.length; i++) {
           if (squares[i] === null) {
               squares[i] = player;
-              best = Math.max(best, minimax(squares, depth + 1, alpha, beta, !isMax));
+              best = Math.max(best, minimax(squares, depth - 1, alpha, beta, false, matrix));
               squares[i] = null;
               alpha = Math.max(alpha, best);
-              if (beta <= alpha) break; // Beta pruning
+              if (beta <= alpha) break; 
           }
       }
       return best;
@@ -79,10 +84,10 @@ function minimax(squares, depth, alpha, beta, isMax, matrix) {
       for (let i = 0; i < squares.length; i++) {
           if (squares[i] === null) {
               squares[i] = opponent;
-              best = Math.min(best, minimax(squares, depth + 1, alpha, beta, !isMax));
+              best = Math.min(best, minimax(squares, depth - 1, alpha, beta, true, matrix));
               squares[i] = null;
               beta = Math.min(beta, best);
-              if (beta <= alpha) break; // Alpha pruning
+              if (beta <= alpha) break; 
           }
       }
       return best;
@@ -99,7 +104,7 @@ function findBestMove(squares, matrix) {
       if (squares[i] === null) {
           squares[i] = player;
 
-          let moveVal = minimax(squares, 0, alpha, beta, false, matrix);
+          let moveVal = minimax(squares, matrix*matrix, alpha, beta, false, matrix);
           squares[i] = null;
           if (moveVal > bestVal) {
               bestVal = moveVal;
@@ -111,7 +116,16 @@ function findBestMove(squares, matrix) {
   return bestMove;
 }
 
-
+const findMove= (squares)=>{
+  
+  let move = Math.floor(Math.random() * (squares.length));
+  if (squares[move] === null) {
+    return move;
+  }
+  else{
+    findMove(squares);
+  }
+}
 
 function Tictactoe() {
     const [matrix, setMatrix] = useState(3)
@@ -155,7 +169,8 @@ function Tictactoe() {
   
     //   const bestMove = getBestMove(squares, xIsNext ? 'O' : 'X');
       // let bestMove = findBestMove(squares);
-      let bestMove = findBestMove(squares, matrix);
+      let bestMove = matrix === 3? findBestMove(squares, matrix) : findMove(squares);
+      
       console.log("Best move for 'O':", bestMove);
       
       console.log("bestMove: ", bestMove);
