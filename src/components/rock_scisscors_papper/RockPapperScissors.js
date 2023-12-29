@@ -1,133 +1,78 @@
-// 1. Install dependencies DONE
-// 2. Import dependencies DONE
-// 3. Setup webcam and canvas DONE
-// 4. Define references to those DONE
-// 5. Load handpose DONE
-// 6. Detect function DONE
-// 7. Drawing utilities DONE
-// 8. Draw functions DONE
+import React, {useState, useEffect} from 'react'
+import HumanP from './HumanP'
+import ComputerP from './ComputerP'
 
-import React, { useRef } from "react";
-// import logo from './logo.svg';
-import * as tf from "@tensorflow/tfjs";
-import * as handpose from "@tensorflow-models/handpose";
-import Webcam from "react-webcam";
-// import "./App.css";
-import { drawHand } from "./utilities";
-import * as fp from "fingerpose";
-import { RockGesture, PaperGesture, ScissorsGesture } from './Gestures';
+function determineWinner(playerChoice, computerChoice) {
+  const choices = ["rock", "paper", "scissors"];
 
-function RockPapperScissors() {
-  const webcamRef = useRef(null);
-  const canvasRef = useRef(null);
+  if (!choices.includes(playerChoice) || !choices.includes(computerChoice)) {
+    return "Invalid choices";
+  }
 
-  const runHandpose = async () => {
-    const net = await handpose.load();
-    // console.log("Handpose model loaded.");
-    //  Loop and detect hands
-    setInterval(() => {
-      detect(net);
-    }, 100);
-  };
-
-  const detect = async (net) => {
-    // Check data is available
-    if (
-      typeof webcamRef.current !== "undefined" &&
-      webcamRef.current !== null &&
-      webcamRef.current.video.readyState === 4
-    ) {
-      // Get Video Properties
-      const video = webcamRef.current.video;
-      const videoWidth = webcamRef.current.video.videoWidth;
-      const videoHeight = webcamRef.current.video.videoHeight;
-
-      // Set video width
-      webcamRef.current.video.width = videoWidth;
-      webcamRef.current.video.height = videoHeight;
-
-      // Set canvas height and width
-      canvasRef.current.width = videoWidth;
-      canvasRef.current.height = videoHeight;
-
-      // Make Detections
-      const hand = await net.estimateHands(video);
-    //   console.log(hand);
-      const knownGestures = [RockGesture, PaperGesture, ScissorsGesture];
-
-      ///////// NEW STUFF ADDED GESTURE HANDLING
-
-      if (hand.length > 0) {
-        const GE = new fp.GestureEstimator(knownGestures);
-        const gesture = await GE.estimate(hand[0].landmarks, 4);
-        // console.log(gesture);
-        if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
-            
-          console.log(gesture.gestures);
-
-        //   const confidence = gesture.gestures.map(
-        //     (prediction) => prediction.confidence
-        //   );
-        //   const maxConfidence = confidence.indexOf(
-        //     Math.max.apply(null, confidence)
-        //   );
-        //   console.log(maxConfidence);
-        //   console.log(gesture.gestures);
-        //   console.log(emoji);
-            const gestureResult = gesture.gestures.reduce((p, c) => { 
-                return (p.score > c.score) ? p : c;});
-            console.log(gestureResult.name);
-
-        }
-      }
-
-      ///////// NEW STUFF ADDED GESTURE HANDLING
-    
-
-      // Draw mesh
-      const ctx = canvasRef.current.getContext("2d");
-      drawHand(hand, ctx);
-    }
-  };
-
-  runHandpose();
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <Webcam
-          ref={webcamRef}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 9,
-            width: 640,
-            height: 480,
-          }}
-        />
-
-        <canvas
-          ref={canvasRef}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 9,
-            width: 640,
-            height: 480,
-          }}
-        />
-      </header>
-    </div>
-  );
+  if (playerChoice === computerChoice) {
+    return "It's a tie!";
+  } else if (
+    (playerChoice === "rock" && computerChoice === "scissors") ||
+    (playerChoice === "paper" && computerChoice === "rock") ||
+    (playerChoice === "scissors" && computerChoice === "paper")
+  ) {
+    return "You win!";
+  } else {
+    return "Computer wins!";
+  }
 }
 
-export default RockPapperScissors;
 
+function RockPapperScissors() {
+  const choice = ["✊️",  "🖐",  "✌️"];
+  const name = [ "rock", "paper", "scissors"];
+
+  const [count, setCount] = useState(5);
+  const [com, setCom] = useState(null);
+  const [hum, setHum] = useState(null);
+  const [start, setStart] = useState(false);
+  useEffect(() => {
+    let timeoutId;
+    if(count === 0){
+      setStart(false);
+    }
+    if (count > 0 && start) {
+      timeoutId = setTimeout(() => {
+        setCount((prevCount) => (prevCount > 0 ? prevCount - 1 : 0));
+      }, 1000);
+    }
+    
+  
+    return () => {
+      // Cleanup function to clear the timeout when the component is unmounted
+      clearTimeout(timeoutId);
+    };
+  }, [start, count]);
+  
+
+
+  return (
+    <div>
+   
+      {count}
+      <ComputerP/>
+      {count=== 0 ? <div>
+        <p>{determineWinner(hum, name[com])}</p>
+        <p>Computer: {name[com]} </p>
+        <h1>{choice[com]}</h1>
+        <p>Human: {hum}</p>
+      </div>: <div></div>
+        }
+      <HumanP setHum = {setHum}  start = {start} /> 
+      {count ===5 || count === 0 ?<button 
+        onClick={()=>{
+          setStart(true);
+          setCount(5);
+          setCom(Math.floor(Math.random() * 3));
+      }}>Start</button>:<></>}
+
+    </div>
+  )
+}
+
+export default RockPapperScissors
