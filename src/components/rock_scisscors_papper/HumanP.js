@@ -10,11 +10,9 @@ import { RockGesture, PaperGesture, ScissorsGesture } from './Gestures';
 function HumanP({setHum, start}) {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
-  // const logStartRef = useRef(false);
   const startRef = useRef(start);
 
   useEffect(() => {
-    // Update the ref when the 'start' prop changes
     startRef.current = start;
     console.log(startRef.current);
   }, [start]);
@@ -60,9 +58,7 @@ function HumanP({setHum, start}) {
             setHum(gestureResult.name);
           }
         }
-      //   logStartRef.current = true;
-      // } else if (!startRef.current) {
-      //   logStartRef.current = false;
+    
       }
 
       const ctx = canvasRef.current.getContext('2d');
@@ -70,9 +66,7 @@ function HumanP({setHum, start}) {
     }
   };
 
-  // useEffect(() => {
-    runHandpose();
-  // }, []); // Run once on component mount
+  runHandpose();
 
   
 
