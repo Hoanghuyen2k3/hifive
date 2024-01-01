@@ -1,0 +1,33 @@
+/* src/components/PuzzleGame.css */
+.puzzle-container {
+    display: flex;
+    /* grid-template-columns: repeat(4, 80px); */
+    gap: 5px;
+    flex-direction: column; 
+
+  }
+  
+  .row {
+    display: flex;
+    /* flex-direction: column; Set the flex direction to column */
+
+  }
+  
+  .tile {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3498db;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    margin-bottom: 5px; /* Add margin to create space between rows */
+  }
+  
+  .empty {
+    background-color: #ecf0f1;
+    cursor: not-allowed;
+  }
+  

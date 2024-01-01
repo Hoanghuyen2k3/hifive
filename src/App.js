@@ -7,13 +7,15 @@ import Tictactoe from './components/tictactoe/Tictactoe';
 import RockPapperScissors from './components/rock_scisscors_papper/RockPapperScissors';
 import MemoryCard from './components/memory_card_game/MemoryCard';
 import WordSearchGame from './components/word_search_game/WordSearchGame';
+import Puzzle from './components/puzzle/Puzzle';
 function App() {
   return (
     <div className="App">
         {/* <Tictactoe /> */}
         {/* <RockPapperScissors /> */}
         {/* <MemoryCard />  */}
-        <WordSearchGame />
+        {/* <WordSearchGame /> */}
+        <Puzzle />
     </div>
   );
 }
