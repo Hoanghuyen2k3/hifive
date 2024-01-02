@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import HumanP from './HumanP'
 import ComputerP from './ComputerP'
-
+import { NavLink, Outlet, useNavigate} from "react-router-dom"
+import { game3, selectGame3 } from '../../features/counterSlice';
+import {useDispatch, useSelector} from 'react-redux';
 function determineWinner(playerChoice, computerChoice) {
   const choices = ["rock", "paper", "scissors"];
 
@@ -31,6 +33,7 @@ function RockPapperScissors() {
   const [com, setCom] = useState(null);
   const [hum, setHum] = useState(null);
   const [start, setStart] = useState(false);
+  const dispatch = useDispatch();
   useEffect(() => {
     let timeoutId;
     if(count === 0){
@@ -49,15 +52,24 @@ function RockPapperScissors() {
     };
   }, [start, count]);
   
-
+  const winner = determineWinner(hum, name[com]);
+  const status3 = useSelector(selectGame3);
+  useEffect(() => {
+    if (winner) {
+      dispatch(game3());
+    }
+  }, [winner, dispatch]);  
 
   return (
     <div>
+      <div>
+        {status3&&<NavLink to="../home">Home</NavLink>}
+      </div>
    
       {count}
       <ComputerP/>
       {count=== 0 ? <div>
-        <p>{determineWinner(hum, name[com])}</p>
+        <p>{winner}</p>
         <p>Computer: {name[com]} </p>
         <h1>{choice[com]}</h1>
         <p>Human: {hum}</p>

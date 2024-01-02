@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
+import { NavLink, Outlet, useNavigate} from "react-router-dom"
+import { game5, selectGame5 } from '../../features/counterSlice';
+import {useDispatch, useSelector} from 'react-redux';
 
 const grid = [
     "N", "O", "D", "E", "P", "I", "Z", "O", "C", "A", "W", "G", 
@@ -22,9 +24,9 @@ const wordList = [
     'CSS',
     'NODE',
     'EXPRESS',
-    'MONGODB',
-    'REDUX',
-    'GRAPHQL'
+    // 'MONGODB',
+    // 'REDUX',
+    // 'GRAPHQL'
   ];
   const firstLine = wordList.slice(0, 4);
   const secondLine = wordList.slice(4);
@@ -33,6 +35,11 @@ const WordSearchGame = () => {
   const [selectedWord, setSelectedWord] = useState([]);
   const [selectedCells, setSelectedCells] = useState([]);
   const [word, setWord] = useState('');
+  const [submitW, setSubmitW] = useState([]);
+
+  const dispatch = useDispatch();
+  const status5 = useSelector(selectGame5);
+
 
   const checkIfCanInclude = (currentIndex) => {
     if (selectedWord.length === 0) {
@@ -73,6 +80,12 @@ const WordSearchGame = () => {
     
   };
 
+  useEffect(()=>{
+    if (submitW.length ===wordList.length) {
+      dispatch(game5());
+    }
+  })
+
   useEffect(() => {
     const sortedSelectedWord = selectedWord.sort((a, b) => a.index - b.index);
     console.log("selected word:", selectedWord);
@@ -84,8 +97,10 @@ const WordSearchGame = () => {
   
     if (wordList.includes(words)) {
       alert(`Congratulations! You found the word: ${words}`);
+      setSubmitW((submitW) => [...submitW, words]);
       setSelectedCells((selectedCells) => [...selectedCells, ...selectedWord]);
       setSelectedWord([]);
+
 
     }
     console.log("word: ", word);
@@ -100,6 +115,10 @@ const WordSearchGame = () => {
   return (
     <div>
       <h1>Word Search Game</h1>
+      <div>
+            {status5&&<NavLink to="../home">Home</NavLink>}
+          </div>
+
       <div>
        
         <button onClick={submitWord}>Submit Word</button>

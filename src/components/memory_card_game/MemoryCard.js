@@ -1,4 +1,7 @@
 import React, {useState, useEffect} from 'react'
+import { game1, selectGame1 } from '../../features/counterSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import { NavLink, Outlet, useNavigate} from "react-router-dom"
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -13,6 +16,9 @@ function MemoryCard() {
     const [count, setCount] = useState(0);
     const [answers, setAnswers] = useState([]);
     const [disabledButtons, setDisabledButtons] = useState([]);
+    const dispatch = useDispatch();
+    const status1 = useSelector(selectGame1);
+    console.log("status1", status1);
 
   
     useEffect(()=>{
@@ -20,6 +26,9 @@ function MemoryCard() {
     },[])
     console.log(card);
     useEffect(()=>{
+        if(count === 8){
+            dispatch(game1());
+        }
         if(answers.length ===2){
             if(answers[0].value ===answers[1].value){
                 setCount(count+1);
@@ -50,6 +59,11 @@ function MemoryCard() {
 
   return (
     <div>
+        <div>
+            {
+                status1 && <NavLink to="../home">Home</NavLink>
+            }
+        </div>
        <h1>{count}</h1>
         {card.map((value, index) => (
             <React.Fragment key={index}>

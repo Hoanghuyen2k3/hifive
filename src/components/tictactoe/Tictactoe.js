@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import Board from './Board'
+import { game2, selectGame2 } from '../../features/counterSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import { NavLink, Outlet, useNavigate} from "react-router-dom"
 
 let player = 'O', opponent = 'X'; 
 
@@ -133,6 +136,8 @@ function Tictactoe() {
     const [history, setHistory] = useState([initialBoard]);
     const [stepNumber, setStepNumber] = useState(0);
     const [xIsNext, setXIsNext] = useState(true);
+    const dispatch = useDispatch();
+    const status2 = useSelector(selectGame2);
   // Update the game state when matrix changes
     useEffect(() => {
         setInitialBoard(Array(matrix * matrix).fill(null));
@@ -146,6 +151,11 @@ function Tictactoe() {
     console.log(lines);
 
     const winner = calculateWinner(currentSquares, lines);
+    useEffect(() => {
+      if (winner) {
+        dispatch(game2());
+      }
+    }, [winner, dispatch]);    
   
     useEffect(() => {
       if (!xIsNext) {
@@ -214,6 +224,9 @@ function Tictactoe() {
 
     return (
         <div>
+          <div>
+            {status2&&<NavLink to="../home">Home</NavLink>}
+          </div>
             <h2>Choose game size: </h2>
             <p>{matrix} x {matrix}</p>
             <input type="number" value={matrix} onChange={(event)=>setMatrix(parseInt(event.target.value, 10) || 0)}/>

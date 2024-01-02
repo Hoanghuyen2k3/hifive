@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import './Puzzle.css';
 import { treeSearch } from './searchAlgorithm';
+import { NavLink, Outlet, useNavigate} from "react-router-dom"
+import {useDispatch, useSelector} from 'react-redux';
+import { game4, selectGame4 } from '../../features/counterSlice';
 
 const finalAn = (N)=>{
     let answer = [];
@@ -27,11 +30,18 @@ const Puzzle = () => {
   const [moves, setMoves] = useState(0);
   const [traceback, setTraceback] = useState(null);
   const [numberToMove, setNumberToMove] = useState([]);
+  const dispatch = useDispatch();
+  const status4 = useSelector(selectGame4);
+
+  // const winner = isSolved(puzzle);
+
   useEffect(() => {
     if (isSolved(puzzle)) {
-      alert(`Congratulations! You solved the puzzle in ${moves} moves.`);
+      // alert(`Congratulations! You solved the puzzle in ${moves} moves.`);
+      dispatch(game4());
+
     }
-  }, [puzzle, moves]);
+  }, [puzzle]);
 
   useEffect(()=>{
     let num = [];
@@ -115,6 +125,9 @@ function findIndexOfZero(array) {
   }
   return (
     <div className="puzzle-container">
+      <div>
+        {status4&&<NavLink to="../home">Home</NavLink>}
+      </div>
       {numberToMove&&numberToMove.map((n)=><p>{n}</p>)}
         
       {puzzle.map((row, rowIndex) => (
