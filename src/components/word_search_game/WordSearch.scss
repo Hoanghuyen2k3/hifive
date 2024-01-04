@@ -118,7 +118,7 @@
         border-radius: 25px;
         /* font-size: 1.2vw !important; */
         font-size: clamp(2vw, 2.2vw, 2.2vw);
-    
+        cursor: pointer;
         background: linear-gradient(to right, violet, rgb(176, 126, 212), rgb(108, 108, 221), rgb(104, 187, 104), yellow, orange, red);
     
     }

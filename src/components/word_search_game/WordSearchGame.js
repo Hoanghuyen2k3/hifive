@@ -3,6 +3,8 @@ import { NavLink, Outlet, useNavigate} from "react-router-dom"
 import { game5, selectGame5 } from '../../features/counterSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import "./WordSearch.scss"
+import win from "../audio/win.mp3";
+
 const grid = [
     "N", "O", "D", "E", "P", "I", "Z", "O", "C", "A", "W", "G", 
     "A", "B", "E", "Q", "N", "J", "J", "I", "V", "B", "C", "Z", 
@@ -218,10 +220,22 @@ const WordSearchGame = () => {
   };
 
   useEffect(()=>{
+    const audio = new Audio(win);
+
     if (submitW.length ===wordList.length) {
       dispatch(game5());
-    }
-  })
+        audio.play();
+    }else {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+  
+      // Cleanup when the component is unmounted
+      return () => {
+        audio.pause();
+        audio.currentTime = 0;
+      };
+  }, [submitW])
 
   useEffect(() => {
     const sortedSelectedWord = selectedWord.sort((a, b) => a.index - b.index);
@@ -260,7 +274,7 @@ const WordSearchGame = () => {
       <div className="redirect">
             <h1 className="redirect-h1">👉</h1>
             {
-                status5 && <NavLink className="point-to-home" to="../home"> Game Box </NavLink>
+                status5 && <NavLink className="point-to-home" to="../home">Next Game</NavLink>
             }
         </div>
 

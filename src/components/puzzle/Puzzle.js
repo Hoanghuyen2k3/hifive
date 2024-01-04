@@ -5,6 +5,7 @@ import { treeSearch } from './searchAlgorithm';
 import { NavLink, Outlet, useNavigate} from "react-router-dom"
 import {useDispatch, useSelector} from 'react-redux';
 import { game4, selectGame4 } from '../../features/counterSlice';
+import win from "../audio/win.mp3";
 
 const finalAn = (N)=>{
     let answer = [];
@@ -34,13 +35,27 @@ const Puzzle = () => {
   const status4 = useSelector(selectGame4);
 
   // const winner = isSolved(puzzle);
+  
 
   useEffect(() => {
+    const audio = new Audio(win);
+
     if (isSolved(puzzle)) {
       // alert(`Congratulations! You solved the puzzle in ${moves} moves.`);
       dispatch(game4());
+      audio.play();
 
-    }
+    
+  } else {
+    audio.pause();
+    audio.currentTime = 0;
+  }
+
+  // Cleanup when the component is unmounted
+  return () => {
+    audio.pause();
+    audio.currentTime = 0;
+  };
   }, [puzzle]);
 
   useEffect(()=>{
@@ -131,7 +146,7 @@ function findIndexOfZero(array) {
       <div className="redirect">
             <h1 className="redirect-h1">👉</h1>
             {
-                status4 && <NavLink className="point-to-home" to="../home"> Game Box </NavLink>
+                status4 && <NavLink className="point-to-home" to="../home">Next Game</NavLink>
             }
           </div>
       

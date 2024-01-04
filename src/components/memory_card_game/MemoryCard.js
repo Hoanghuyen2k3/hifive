@@ -3,6 +3,7 @@ import { game1, selectGame1 } from '../../features/counterSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import { NavLink, Outlet, useNavigate} from "react-router-dom"
 import "./Memory.css";
+import win from "../audio/win.mp3";
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -48,7 +49,7 @@ function MemoryCard() {
                     }
                 }
                 setAnswers([]);
-            }, 300);
+            }, 200);
             
         }
     }, [answers, count, click])
@@ -59,6 +60,24 @@ function MemoryCard() {
         !disabledButtons.includes(index)&&setDisabledButtons((prevDisabledButtons) => [...prevDisabledButtons, index,]);
     }
 
+    useEffect(() => {
+        const audio = new Audio(win);
+    
+        if (count ===8) {
+          audio.play();
+        //   audio.loop = true;
+        } else {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+    
+        // Cleanup when the component is unmounted
+        return () => {
+          audio.pause();
+          audio.currentTime = 0;
+        };
+      }, [count]);
+
   return (
     <div className="memory">
         <h1 className="memory-h1">Memory Card Game</h1>
@@ -67,7 +86,7 @@ function MemoryCard() {
         <div className="redirect">
             <h1 className="redirect-h1">👉</h1>
             {
-                status1 && <NavLink className="point-to-home" to="../home"> Game Box </NavLink>
+                status1 && <NavLink className="point-to-home" to="../home">Next Game</NavLink>
             }
         </div>
         

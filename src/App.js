@@ -6,24 +6,19 @@ import MemoryCard from './components/memory_card_game/MemoryCard';
 import WordSearchGame from './components/word_search_game/WordSearchGame';
 import Puzzle from './components/puzzle/Puzzle';
 import Home from './components/home/Home';
+import Main from './components/main/Main';
 import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
-  Route
+  Route, 
+  
 } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux';
-import { selectGame1, selectGame2, selectGame3, selectGame4, selectGame5 , turn, selectSwitch} from './features/counterSlice';
+import {turn, selectSwitch} from './features/counterSlice';
 
 const App = () => {
-  const status1 = useSelector(selectGame1);
-  const status2 = useSelector(selectGame2);
-
-  const status3 = useSelector(selectGame3);
-
-  const status4 = useSelector(selectGame4);
-
-  const status5 = useSelector(selectGame5);
+  
   const dispatch = useDispatch();
 
   const black = useSelector(selectSwitch);
@@ -37,7 +32,7 @@ const App = () => {
   
 
   const router = createBrowserRouter(createRoutesFromElements(
-    <Route>
+    <Route path="/hifive" element={<Main />}>
       <Route index element ={<Home />} />
       <Route path="home" element={<Home />} />
       <Route path="home/tictactoe" element={<Tictactoe />} />
@@ -63,13 +58,7 @@ const App = () => {
       <button className="switch" onClick={handC}>⚫⚪</button>
       <p>{black}</p>
       
-      <div className="banner">
-          <div className={status1? "reg yellow" : "reg"}></div>
-          <div className={status2? "reg yellow" : "reg"}></div>
-          <div className={status3? "reg yellow" : "reg"}></div>
-          <div className={status4? "reg yellow" : "reg"}></div>
-          <div className={status5? "reg yellow" : "reg"}></div>
-      </div>
+      
     </div>
   );
 };

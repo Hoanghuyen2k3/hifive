@@ -20,6 +20,7 @@
   left: auto;
   right: 20px;
   font-size: 2vw;
+  cursor: pointer;
 }
 .App{
   display: flex;
@@ -32,11 +33,25 @@
   
 
 }
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.main-audio {
+  font-size: clamp(25px, 3vw, 40px);
+  position: fixed;
+  left: auto;
+  top: 20px;
+  right:12%;
+  cursor: pointer;
+}
 .banner {
   display: flex;
   gap: 10px;
   top: auto;
-  margin-bottom: 150px;
+  margin-top: 40px;
+  margin-bottom: 50px;
 }
 .reg{
   background-color: rgb(87, 83, 91);
@@ -44,8 +59,10 @@
   height: 15px;
   border-radius: 5px;
   margin-top: 40px;
+  cursor: pointer;
 
 }
 .yellow{
   background-color: rgb(255, 208, 0);
 }
+

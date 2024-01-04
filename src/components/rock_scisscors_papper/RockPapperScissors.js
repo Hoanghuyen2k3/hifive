@@ -4,6 +4,8 @@ import "./Rock.scss"
 import { NavLink} from "react-router-dom"
 import { game3, selectGame3 } from '../../features/counterSlice';
 import {useDispatch, useSelector} from 'react-redux';
+import win from "../audio/win.mp3";
+
 function determineWinner(playerChoice, computerChoice) {
   const choices = ["rock", "paper", "scissors"];
 
@@ -56,11 +58,25 @@ function RockPapperScissors() {
   }, [start, count, com, hum, name]);
   
   const status3 = useSelector(selectGame3);
+
+  
   useEffect(() => {
+    const audio = new Audio(win);
+
     console.log(winner)
     if (winner) {
       dispatch(game3());
+      audio.play();
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
     }
+
+    // Cleanup when the component is unmounted
+    return () => {
+      audio.pause();
+      audio.currentTime = 0;
+    };
   }, [winner, dispatch]);  
 
   return (
@@ -70,7 +86,7 @@ function RockPapperScissors() {
       <div className="redirect">
             <h1 className="redirect-h1">👉</h1>
             {
-                status3 && <NavLink className="point-to-home" to="../home"> Game Box </NavLink>
+                status3 && <NavLink className="point-to-home" to="../home">Next Game</NavLink>
             }
         </div>  
         {count ===5 || count === 0 ?

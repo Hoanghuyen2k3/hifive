@@ -4,6 +4,8 @@ import { game2, selectGame2 } from '../../features/counterSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import { NavLink, Outlet, useNavigate} from "react-router-dom"
 import "./Tic.scss"
+import win from "../audio/win.mp3";
+
 let player = 'O', opponent = 'X'; 
 
 // Generate all possible winning lines for a square board of any size
@@ -152,9 +154,21 @@ function Tictactoe() {
 
     const winner = calculateWinner(currentSquares, lines);
     useEffect(() => {
+      const audio = new Audio(win);
+
       if (winner) {
         dispatch(game2());
+        audio.play();
+      }else {
+        audio.pause();
+        audio.currentTime = 0;
       }
+  
+      // Cleanup when the component is unmounted
+      return () => {
+        audio.pause();
+        audio.currentTime = 0;
+      };
     }, [winner, dispatch]);    
   
     useEffect(() => {
@@ -229,16 +243,12 @@ function Tictactoe() {
           <div className="redirect">
             <h1 className="redirect-h1">👉</h1>
             {
-                status2 && <NavLink className="point-to-home" to="../home"> Game Box </NavLink>
+                status2 && <NavLink className="point-to-home" to="../home">Next Game </NavLink>
             }
           </div>
-
-         
-
-
-            
-          <h2 className="tic-infor">{ !winner ? `Next player: ${xIsNext ? 'X' : 'O'}` : (winner==='X' ? "You Win 😃!":(winner==='O'? "You Lose 😥" : "Draw 🙂"))}</h2>
           <button className="tic-restart" onClick={restartGame}>Restart</button>
+          <h2 className="tic-infor">{ !winner ? `Next player: ${xIsNext ? 'X' : 'O'}` : (winner==='X' ? "You Win 😃!":(winner==='O'? "You Lose 😥" : "Draw 🙂"))}</h2>
+
             <Board initialBoard = {initialBoard} matrix ={matrix} squares={currentSquares} onClick={handleClick} />
             
 
