@@ -4,8 +4,10 @@
 } */
 
 .square {
-    width: 150px; 
-    height: 150px;
+    width: 12vw; 
+    height: 12vw;
+    max-width: 120px;
+    max-height: 120px;
     margin: 5px; 
     font-size: 16px; 
     background-color: white;
@@ -52,7 +54,7 @@
 }
 .point-to-home {
     text-decoration: none;
-    font-size: 4vw;
+    font-size: clamp(20px, 3vw, 25px);
     font-weight: bold;
     animation:blinking 5s infinite;
     text-shadow: 2px 2px #fbee05;
@@ -71,11 +73,11 @@
     }
     
 @media only screen and (max-width: 1200px){
-    .square {
+    /* .square {
         width: 100px; 
         height: 100px;
         
-      }
+      } */
     
     .card {
         font-size: 60px;

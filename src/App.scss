@@ -6,6 +6,7 @@
   /* margin-bottom: 15px; */
  
 }
+
 .blackMode {
   background-color: rgb(48, 47, 47);
   color: rgb(232, 211, 211);
@@ -64,5 +65,33 @@
 }
 .yellow{
   background-color: rgb(255, 208, 0);
+}
+
+.progress-restart {
+  margin: 50px auto;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 25px;
+  // font-size: 1.2vw !important;
+  font-size: clamp(2vw, 2.2vw, 2.2vw);
+  cursor: pointer;
+  background: linear-gradient(to right, violet, rgb(176, 126, 212), rgb(108, 108, 221), rgb(104, 187, 104), yellow, orange, red);
+
+}
+
+.hooray{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(240, 250, 255);
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  position: fixed;
+  top: 10%;
+  .img {
+    width: 50vw;
+    max-width: 500px;
+  }
 }
 

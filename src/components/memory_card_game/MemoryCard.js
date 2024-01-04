@@ -49,7 +49,7 @@ function MemoryCard() {
                     }
                 }
                 setAnswers([]);
-            }, 200);
+            }, 100);
             
         }
     }, [answers, count, click])
@@ -84,7 +84,6 @@ function MemoryCard() {
         <h2 className="memory-span">Your goal is to match pairs of cards with identical symbols. Symply click to flip a card, then click another to find its match. Matched pairs remain face-up, while non-matches flip back down. Win by matching all card pairs!</h2>
 
         <div className="redirect">
-            <h1 className="redirect-h1">👉</h1>
             {
                 status1 && <NavLink className="point-to-home" to="../home">Next Game</NavLink>
             }

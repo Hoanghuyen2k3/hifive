@@ -82,9 +82,8 @@ function RockPapperScissors() {
   return (
     <div className="rock-game">
       <h1 className="rock-game-h1">Rock Papper Scissors</h1>
-      <h2 className="rock-game-h2">Immerse yourself in the interactive world of Rock, Paper, Scissors with our innovative web cam feature! The objective is simple: face off against the computer by showcasing your hand pose—Rock, Paper, or Scissors. As the game kicks off, you have a swift 5 seconds to make your decision, and our web cam will capture your chosen pose. Will you outsmart the computer with the perfect move?</h2>
+      <h2 className="rock-game-h2">Display your hand in front of the webcam and dive into the interactive realm of Rock, Paper, Scissors using our cutting-edge webcam feature! The goal is straightforward: engage in a showdown with the computer by presenting your hand pose—Rock, Paper, or Scissors. As the game commences, you have a brief 5 seconds to finalize your decision, and our webcam will capture your selected pose. Can you outwit the computer with the ideal move?</h2>
       <div className="redirect">
-            <h1 className="redirect-h1">👉</h1>
             {
                 status3 && <NavLink className="point-to-home" to="../home">Next Game</NavLink>
             }

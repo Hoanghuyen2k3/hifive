@@ -9,6 +9,7 @@ const initialState = {
   status4: false,
   status5: false,
   switch: false,
+  
 
 };
 
@@ -44,6 +45,9 @@ export const counterSlice = createSlice({
     },
     turn: (state)=>{
       state.switch = !state.switch;
+    },
+    restart:(state)=>{
+      state.status1 = state.status2 = state.status3 =state.status4 = state.status5 = false;
     }
    
   },
@@ -51,7 +55,7 @@ export const counterSlice = createSlice({
   
 });
 
-export const { increment, game1, game2, game3, game4, game5, turn} = counterSlice.actions;
+export const { increment, game1, game2, game3, game4, game5, turn, restart} = counterSlice.actions;
 export const selectGame1 = (state) => state.counter.status1;
 export const selectGame2 = (state) => state.counter.status2;
 export const selectGame3 = (state) => state.counter.status3;

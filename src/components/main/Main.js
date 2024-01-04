@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import { NavLink, Outlet, useNavigate} from "react-router-dom"
-import { selectGame1, selectGame2, selectGame3, selectGame4, selectGame5 , turn, selectSwitch} from '../../features/counterSlice';
+import { selectGame1, selectGame2, selectGame3, selectGame4, selectGame5 , turn, selectSwitch, restart} from '../../features/counterSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import Sweet from "../audio/Sweet.mp3";
 import { FaVolumeUp, FaVolumeMute  } from "react-icons/fa";
-
+import gigphy from "../images/giphy.gif"
 function Main() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const status1 = useSelector(selectGame1);
     const status2 = useSelector(selectGame2);
   
@@ -43,7 +44,20 @@ function Main() {
         <div className="main-audio" onClick={()=>setPlay((play)=>!play)}>{play ? <FaVolumeUp /> : <FaVolumeMute />} </div>
         
         <Outlet />
-
+        
+        
+         
+        {
+          status1 && status2 && status3 && status4 && status5 &&  
+          <div className="hooray">
+            <button className="progress-restart" onClick={()=> {
+              navigate("/hifive");
+              dispatch(restart());
+          }}>Reset Progress</button>
+            <img className="img" src={gigphy} alt="hooray success" />
+          </div>
+          
+        }
         <div className="banner">
           <div onClick={()=> navigate("/hifive/memorycard")} className={status1? "reg yellow" : "reg"}></div>
           <div onClick={()=> navigate("/hifive/tictactoe")} className={status2? "reg yellow" : "reg"}></div>

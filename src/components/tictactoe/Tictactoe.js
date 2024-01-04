@@ -239,9 +239,8 @@ function Tictactoe() {
     return (
         <div className="tic-game">
           <h1 className="tic-h1">Tic Tac Toe</h1>
-          <h2 className="tic-span">Take on the challenge of Tic Tac Toe against a cunning computer opponent! You, as the 'X' player, make the first move. Your mission is to strategically place three 'X' marks consecutively in a row, column, or diagonal to secure victory. The computer, playing as 'O,' will employ the powerful Minimax algorithm on a 3x3 board, ensuring a formidable match. For other board sizes, the computer operates at a normal level.</h2>
+          <h2 className="tic-span">Take on the challenge of Tic Tac Toe against a cunning computer opponent! You, as the 'X' player, make the first move. Your mission is to strategically place three 'X' marks consecutively in a row, column, or diagonal to secure victory. The computer, playing as 'O,' will employ the powerful Minimax algorithm on a 3x3 board, ensuring a formidable match.</h2>
           <div className="redirect">
-            <h1 className="redirect-h1">👉</h1>
             {
                 status2 && <NavLink className="point-to-home" to="../home">Next Game </NavLink>
             }

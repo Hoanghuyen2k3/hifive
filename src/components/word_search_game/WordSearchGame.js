@@ -270,9 +270,8 @@ const WordSearchGame = () => {
   return (
     <div className="word-search">
       <h1 className="wordSearch-h1">Word Search Game</h1>
-      <h2 className="wordSearch-h2">Embark on an engaging journey with our Word Search game, where your goal is to discover hidden words within a grid of characters. Simply click on a cell to select a character, and then continue selecting adjacent characters vertically, horizontally, or diagonally to form the words listed. Matched words stay highlighted, revealing your progress, while unselected characters return to their original state. The challenge intensifies as you strive to find and link all the words from the list to achieve victory. Exercise your word-finding skills, and remember, you can deselect a character by clicking on the cell again. Enjoy the thrill of conquering the Word Search puzzle!</h2>
+      <h2 className="wordSearch-h2">Your goal is to discover hidden words within a grid of characters. Simply click on a cell to select a character, and then continue selecting adjacent characters vertically, horizontally, or diagonally to form the words listed. Matched words stay highlighted, revealing your progress, while unselected characters return to their original state. Enjoy the thrill of conquering the Word Search puzzle!</h2>
       <div className="redirect">
-            <h1 className="redirect-h1">👉</h1>
             {
                 status5 && <NavLink className="point-to-home" to="../home">Next Game</NavLink>
             }

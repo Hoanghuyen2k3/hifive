@@ -144,7 +144,6 @@ function findIndexOfZero(array) {
       <h1 className="puzzle-h1">8* Puzzle</h1>
       <h2 className="puzzle-span">Challenge your mind with the 8-Puzzle game, a captivating exercise in strategy and spatial reasoning. Maneuver numbered tiles within a 3x3 grid by sliding them into the empty square, aiming to arrange the numbers from 1 to 8. Victory is achieved by skillfully moving the empty space, strategically aligning the tiles in perfect order. Sharpen your puzzle-solving skills and enjoy the satisfaction of conquering the 8-Puzzle challenge.</h2>
       <div className="redirect">
-            <h1 className="redirect-h1">👉</h1>
             {
                 status4 && <NavLink className="point-to-home" to="../home">Next Game</NavLink>
             }
