@@ -1,14 +1,6 @@
 # HiFive - ReactJS Game Collection
 
-HiFive is a collection of five engaging games developed using ReactJS, Redux, CSS, HTML, and SCSS. Each game is designed to provide a fun and challenging experience for users. The project includes the following games:
-
-## Technologies Used
-- ReactJS
-- Redux
-- CSS
-- HTML
-- SCSS
-- TensorFlow (for Rock, Paper, Scissors game)
+HiFive is a collection of five engaging games developed using ReactJS, Redux, CSS, HTML, and SCSS and TensorFlow (for Rock, Paper, Scissors game). Each game is designed to provide a fun and challenging experience for users. The project includes the following games:
   
 ## Games
 
@@ -29,7 +21,15 @@ HiFive is a collection of five engaging games developed using ReactJS, Redux, CS
 
 ### 5. Word Search
 - Users must find all the hidden words in the given grid.
-
+  
+## Technologies Used
+- ReactJS
+- Redux
+- CSS
+- HTML
+- SCSS
+- TensorFlow (for Rock, Paper, Scissors game)
+  
 ## Getting Started
 1. Clone the repository:
    ```bash
