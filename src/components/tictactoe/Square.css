@@ -1,0 +1,25 @@
+.clear{
+    color: white;
+    font-weight: bold;
+    font-size: 8vw !important;
+}
+
+.X {
+    color: red;
+    font-weight: bold;
+    font-size: 8vw !important;
+}
+.O{
+    color: green;
+    font-weight: bold;
+    font-size: 8vw !important;
+}
+
+.square:hover{
+    background-color: antiquewhite;
+}
+@media only screen and (min-width: 1000px){
+    .X, .O, .clear{
+        font-size: 5vw !important;
+    }
+}

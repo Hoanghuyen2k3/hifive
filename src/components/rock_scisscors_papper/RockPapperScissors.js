@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import HumanP from './HumanP'
-import ComputerP from './ComputerP'
-import { NavLink, Outlet, useNavigate} from "react-router-dom"
+import "./Rock.scss"
+import { NavLink} from "react-router-dom"
 import { game3, selectGame3 } from '../../features/counterSlice';
 import {useDispatch, useSelector} from 'react-redux';
 function determineWinner(playerChoice, computerChoice) {
@@ -61,27 +61,47 @@ function RockPapperScissors() {
   }, [winner, dispatch]);  
 
   return (
-    <div>
+    <div className="rock-game">
+      <h1 className="rock-game-h1">Rock Papper Scissors</h1>
+      <h2 className="rock-game-h2">Immerse yourself in the interactive world of Rock, Paper, Scissors with our innovative web cam feature! The objective is simple: face off against the computer by showcasing your hand pose—Rock, Paper, or Scissors. As the game kicks off, you have a swift 5 seconds to make your decision, and our web cam will capture your chosen pose. Will you outsmart the computer with the perfect move?</h2>
       <div>
         {status3&&<NavLink to="../home">Home</NavLink>}
-      </div>
-   
-      {count}
-      <ComputerP/>
-      {count=== 0 ? <div>
-        <p>{winner}</p>
-        <p>Computer: {name[com]} </p>
+      </div>  
+        {count ===5 || count === 0 ?
+        <button 
+          className="rock-start"
+          onClick={()=>{
+            setStart(true);
+            setCount(5);
+            setCom(Math.floor(Math.random() * 3));
+        }}>Start</button>:<></>}
+
+        <p className="count">{count}</p>
+      {count=== 0 ? 
+      <div>
+        <p className="result">{winner}</p>
+        {/* <p>Computer: {name[com]} </p>
         <h1>{choice[com]}</h1>
-        <p>Human: {hum}</p>
+        <p>Human: {hum}</p> */}
       </div>: <div></div>
         }
-      <HumanP setHum = {setHum}  start = {start} /> 
-      {count ===5 || count === 0 ?<button 
-        onClick={()=>{
-          setStart(true);
-          setCount(5);
-          setCom(Math.floor(Math.random() * 3));
-      }}>Start</button>:<></>}
+
+      <div className="player">
+        <div className="computer">
+          <h2>Computer</h2>
+          <div className="comp-choice">
+            {
+              count===5? <h1>✊️🖐✌️</h1>:(count ===4?  <h1>✊️</h1>:(count ===3? <h1>🖐</h1>:(count ===2? <h1>✌️</h1>:(count ===1?  <h1>✊️</h1>: <h1>{choice[com]}</h1>))))
+            }
+          </div>
+
+
+        </div>
+
+        <HumanP setHum = {setHum}  start = {start} /> 
+
+      </div>
+      
 
     </div>
   )

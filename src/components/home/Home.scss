@@ -1,0 +1,80 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+.homeh1 {
+    font-size: 8vw;
+    animation:blinking 5s infinite;
+    text-shadow: 2px 2px #ff0000;
+    
+}
+h2 {
+    font-size: 3vw;
+    
+}
+@keyframes blinking{
+    0%{   color: red;   }
+    47%{   color: #000; }
+    62%{   color: transparent; }
+    97%{   color:transparent; }
+    100%{  color: #000;   }
+    }
+
+p{
+    margin: 20px;
+    width: 90%;
+    font-size: 2.5vw;
+    /* background-color: aqua; */
+    max-width: 1000px;
+}
+.options {
+    width: 80%;
+    margin-top: 50px;
+    margin-bottom: 25px;
+    padding: 10px 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+img {
+    width: 25vw;
+    margin: 10px;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+img:hover{
+    width: 25.3vw;
+    border: 5px solid rgb(236, 210, 13);
+}
+
+
+
+@media only screen and (min-width: 850px) {
+    .homeh1 {
+        font-size: 6vw;
+    }
+    h2 {
+        font-size: 2vw;
+    }
+
+    p{
+        width: 80%;
+        font-size: 22px;
+    }
+    img {
+        width: 16vw;
+    }
+    
+    img:hover{
+        width: 16.3vw;
+    }
+    .options {
+    width: 80%;
+    margin-top: 100px;
+    margin-bottom: 25px;
+    padding: 50px 50px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+}

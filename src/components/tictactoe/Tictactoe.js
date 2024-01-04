@@ -3,7 +3,7 @@ import Board from './Board'
 import { game2, selectGame2 } from '../../features/counterSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import { NavLink, Outlet, useNavigate} from "react-router-dom"
-
+import "./Tic.scss"
 let player = 'O', opponent = 'X'; 
 
 // Generate all possible winning lines for a square board of any size
@@ -223,19 +223,24 @@ function Tictactoe() {
    
 
     return (
-        <div>
-          <div>
-            {status2&&<NavLink to="../home">Home</NavLink>}
+        <div className="tic-game">
+          <h1 className="tic-h1">Tic Tac Toe</h1>
+          <h2 className="tic-span">Take on the challenge of Tic Tac Toe against a cunning computer opponent! You, as the 'X' player, make the first move. Your mission is to strategically place three 'X' marks consecutively in a row, column, or diagonal to secure victory. The computer, playing as 'O,' will employ the powerful Minimax algorithm on a 3x3 board, ensuring a formidable match. For other board sizes, the computer operates at a normal level.</h2>
+          <div className="redirect">
+            <h1 className="redirect-h1">👉</h1>
+            {
+                status2 && <NavLink className="point-to-home" to="../home"> Game Box </NavLink>
+            }
           </div>
-            <h2>Choose game size: </h2>
-            <p>{matrix} x {matrix}</p>
-            <input type="number" value={matrix} onChange={(event)=>setMatrix(parseInt(event.target.value, 10) || 0)}/>
+
+         
+
+
             
+          <h2 className="tic-infor">{ !winner ? `Next player: ${xIsNext ? 'X' : 'O'}` : (winner==='X' ? "You Win 😃!":(winner==='O'? "You Lose 😥" : "Draw 🙂"))}</h2>
+          <button className="tic-restart" onClick={restartGame}>Restart</button>
             <Board initialBoard = {initialBoard} matrix ={matrix} squares={currentSquares} onClick={handleClick} />
-            <div className="game-info">
-                <div>{winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'X' : 'O'}`}</div>
-                <button onClick={restartGame}>Restart</button>
-            </div>
+            
 
         </div>
   )

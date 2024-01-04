@@ -17,12 +17,22 @@ function HumanP({setHum, start}) {
     console.log(startRef.current);
   }, [start]);
 
+  // const runHandpose = async () => {
+  //   const net = await handpose.load();
+  //   setInterval(() => {
+  //     detect(net);
+  //   }, 100);
+  // };
+
   const runHandpose = async () => {
     const net = await handpose.load();
-    setInterval(() => {
+    const detectFrame = () => {
       detect(net);
-    }, 100);
+      requestAnimationFrame(detectFrame);
+    };
+    detectFrame();
   };
+  
 
   const detect = async (net) => {
     if (
@@ -66,43 +76,38 @@ function HumanP({setHum, start}) {
     }
   };
 
-  runHandpose();
+  // runHandpose();
+
+  useEffect(() => {
+    let isMounted = true;
+  
+    const cleanup = () => {
+      isMounted = false;
+      // Dispose TensorFlow.js models
+    };
+  
+    runHandpose();
+  
+    return cleanup;
+  }, []);
+  
 
   
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="Human">
+      <h2>Human</h2>
+      {/* <header className="Human-header"> */}
         <Webcam
           ref={webcamRef}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 9,
-            width: 640,
-            height: 480,
-          }}
+          className="webcam"
         />
 
         <canvas
           ref={canvasRef}
-          style={{
-            position: "absolute",
-            marginLeft: "auto",
-            marginRight: "auto",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            zindex: 9,
-            width: 640,
-            height: 480,
-          }}
+          className="canvas"
         />
-      </header>
+      {/* </header> */}
     </div>
   );
 }

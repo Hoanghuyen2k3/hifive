@@ -120,15 +120,21 @@ function findIndexOfZero(array) {
   console.log(puzzle);
 
   const handleSove =()=>{
-    setTraceback(treeSearch(puzzle, finalAnswer));
     setNumberToMove([]);
+    setTraceback(treeSearch(puzzle, finalAnswer));
+    
   }
   return (
     <div className="puzzle-container">
-      <div>
-        {status4&&<NavLink to="../home">Home</NavLink>}
-      </div>
-      {numberToMove&&numberToMove.map((n)=><p>{n}</p>)}
+      <h1 className="puzzle-h1">8* Puzzle</h1>
+      <h2 className="puzzle-span">Challenge your mind with the 8-Puzzle game, a captivating exercise in strategy and spatial reasoning. Maneuver numbered tiles within a 3x3 grid by sliding them into the empty square, aiming to arrange the numbers from 1 to 8. Victory is achieved by skillfully moving the empty space, strategically aligning the tiles in perfect order. Sharpen your puzzle-solving skills and enjoy the satisfaction of conquering the 8-Puzzle challenge.</h2>
+      <div className="redirect">
+            <h1 className="redirect-h1">👉</h1>
+            {
+                status4 && <NavLink className="point-to-home" to="../home"> Game Box </NavLink>
+            }
+          </div>
+      
         
       {puzzle.map((row, rowIndex) => (
         <div key={rowIndex} className="row">
@@ -145,9 +151,30 @@ function findIndexOfZero(array) {
           <br/>
         </div>
       ))}
-      <button onClick={handleSove}>Solve</button>
+
+<button className="puzzle-solve" onClick={handleSove}>Help to Solve</button>
+<div className="puzzle-hint">
+  <ol>
+    {numberToMove&&numberToMove.slice().reverse().map((n, index)=><li key={index}>Move {n}</li>) 
+    }
+
+  </ol>
+
+</div>
+
+
     </div>
   );
 };
 
 export default Puzzle;
+
+
+// puzzle_list = [
+//   ("demo", [[1, 0, 3], [4, 2, 6], [7, 5, 8]]),
+//   ("trivial", [[1, 2, 3], [4, 5, 6], [7, 8, 0]]),
+//   ("very easy", [[1, 2, 3], [4, 5, 6], [7, 0, 8]]),
+//   ("easy", [[1, 2, 0], [4, 5, 3], [7, 8, 6]]),
+//   ("doable", [[0, 1, 2], [4, 5, 3], [7, 8, 6]]),
+//   ("oh boy", [[8, 7, 1], [6, 0, 2], [5, 4, 3]]),
+//   ("impossible", [[1, 2, 3], [4, 5, 6], [8, 7, 0]]),

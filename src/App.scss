@@ -1,0 +1,49 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* background-color: antiquewhite; */
+  /* margin-bottom: 15px; */
+ 
+}
+.blackMode {
+  background-color: rgb(48, 47, 47);
+  color: rgb(232, 211, 211);
+  .puzzle-hint {
+    box-shadow: rgba(238, 227, 14, 0.24) 0px 3px 8px;
+    background-color: #523a81;
+  }
+}
+.switch {
+  position: fixed;
+  top: 20px;
+  left: auto;
+  right: 20px;
+  font-size: 2vw;
+}
+.App{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  text-align: center;
+  
+
+}
+.banner {
+  display: flex;
+  gap: 10px;
+  top: auto;
+  margin-bottom: 150px;
+}
+.reg{
+  background-color: aqua;
+  width: 10vw;
+  height: 15px;
+  border-radius: 5px;
+  margin-top: 40px;
+
+}
+.yellow{
+  background-color: yellow;
+}

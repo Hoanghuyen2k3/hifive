@@ -9,7 +9,7 @@ const fingerJoints = {
   
   // Infinity Gauntlet Style
   const style = {
-    0: { color: "yellow", size: 15 },
+    0: { color: "yellow", size: 11 },
     1: { color: "gold", size: 6 },
     2: { color: "green", size: 10 },
     3: { color: "gold", size: 6 },
@@ -74,7 +74,7 @@ const fingerJoints = {
           const y = landmarks[i][1];
           // Start drawing
           ctx.beginPath();
-          ctx.arc(x, y, style[i]["size"], 0, 3 * Math.PI);
+          ctx.arc(x, y, style[i]["size"], 0, 2 * Math.PI);
   
           // Set line color
           ctx.fillStyle = style[i]["color"];

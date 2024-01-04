@@ -1,0 +1,121 @@
+.player {
+    display: flex;
+}
+
+.computer, .Human{
+    margin: 10px;
+    border: 1px solid black;
+    width: 45vw;
+    height: 600px;
+}
+// .Human-header{
+//     width: 40vw;
+//     height: 480px;
+// }
+.webcam, .canvas {
+    position: absolute;
+    margin-left: auto;
+    // margin-right: auto;
+    // left: 0;
+    right: 30px;
+    text-align: center;
+    z-index: 100;
+    width: 45vw;
+    // height: 100%;
+}
+
+
+
+// style={{
+//     position: "absolute",
+//     marginLeft: "auto",
+//     // marginRight: "auto",
+//     left: 0,
+//     right: 0,
+//     textAlign: "center",
+//     zindex: 100,
+//     width: 640,
+//     height: 480,
+//   }}
+.rock-game{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.rock-game-h1 {
+    margin-top: 50px;
+    font-size: 3vw;
+    margin-bottom: 50px;
+}
+.rock-game-h2{
+    font-size: 1.3vw;
+    width: 58vw;
+    font-weight: normal;
+    margin-bottom: 30px;
+}
+
+.rock-start {
+    margin: 50px auto;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 25px;
+    /* font-size: 1.2vw !important; */
+    font-size: clamp(2vw, 2.2vw, 2.2vw);
+
+    background: linear-gradient(to right, violet, rgb(176, 126, 212), rgb(108, 108, 221), rgb(104, 187, 104), yellow, orange, red);
+
+}
+.count {
+    // font-size: clamp(20px, 5vw,  40px);
+    font-size: 8vw;
+    font-family: 'Rubik Doodle Shadow', system-ui;
+    font-weight: bold;
+}
+.comp-choice {
+    font-size: 5vw;
+    font-weight: bold;
+    font-family: 'Rubik Doodle Shadow', system-ui;
+
+}
+.result {
+    font-family: 'Rubik Doodle Shadow', system-ui;
+    font-weight: bold;
+    font-size: clamp(30px, 5vw, 50px);
+    color:rgb(6, 121, 17);
+
+}
+@media only screen and (max-width: 1000px){
+    .player{
+        flex-direction: column;
+    }
+    .computer, .Human{
+        width: 92vw;
+    }
+    .computer{
+        height: auto;
+    }
+
+    .webcam, .canvas {
+        right: 10px;
+        width: 92vw;
+        // height: 100%;
+    }
+    .count {
+        font-size: 12vw;
+    }
+    
+}
+
+@media only screen and (max-width: 1100px){
+  
+    .rock-game-h1 {
+        font-size: 4.5vw;
+    }
+    .rock-game-h2{
+        font-size: 2.5vw;
+        width: 85vw;
+        font-weight: normal;
+        margin-bottom: 30px;
+    }
+    
+  }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Outlet, useNavigate} from "react-router-dom"
 import { game5, selectGame5 } from '../../features/counterSlice';
 import {useDispatch, useSelector} from 'react-redux';
-
+import "./WordSearch.scss"
 const grid = [
     "N", "O", "D", "E", "P", "I", "Z", "O", "C", "A", "W", "G", 
     "A", "B", "E", "Q", "N", "J", "J", "I", "V", "B", "C", "Z", 
@@ -36,6 +36,7 @@ const WordSearchGame = () => {
   const [selectedCells, setSelectedCells] = useState([]);
   const [word, setWord] = useState('');
   const [submitW, setSubmitW] = useState([]);
+  
 
   const dispatch = useDispatch();
   const status5 = useSelector(selectGame5);
@@ -96,7 +97,7 @@ const WordSearchGame = () => {
     setWord(words);
   
     if (wordList.includes(words)) {
-      alert(`Congratulations! You found the word: ${words}`);
+      // alert(`Congratulations! You found the word: ${words}`);
       setSubmitW((submitW) => [...submitW, words]);
       setSelectedCells((selectedCells) => [...selectedCells, ...selectedWord]);
       setSelectedWord([]);
@@ -113,22 +114,28 @@ const WordSearchGame = () => {
   };
 
   return (
-    <div>
-      <h1>Word Search Game</h1>
-      <div>
-            {status5&&<NavLink to="../home">Home</NavLink>}
-          </div>
+    <div className="word-search">
+      <h1 className="wordSearch-h1">Word Search Game</h1>
+      <h2 className="wordSearch-h2">Embark on an engaging journey with our Word Search game, where your goal is to discover hidden words within a grid of characters. Simply click on a cell to select a character, and then continue selecting adjacent characters vertically, horizontally, or diagonally to form the words listed. Matched words stay highlighted, revealing your progress, while unselected characters return to their original state. The challenge intensifies as you strive to find and link all the words from the list to achieve victory. Exercise your word-finding skills, and remember, you can deselect a character by clicking on the cell again. Enjoy the thrill of conquering the Word Search puzzle!</h2>
+      <div className="redirect">
+            <h1 className="redirect-h1">👉</h1>
+            {
+                status5 && <NavLink className="point-to-home" to="../home"> Game Box </NavLink>
+            }
+        </div>
 
       <div>
        
-        <button onClick={submitWord}>Submit Word</button>
+        <button className="wordSearch-submit" onClick={submitWord}>Submit Word</button>
       </div>
-      <div>
-        <p>Selected Word: {word}</p>
+      <p>Selected Word: {word}</p>
+      <div className="list">
+        
         {grid.map((value, index) => (
             <React.Fragment key={index}>
                 <button 
-                    value ={value} className="square" 
+                    value ={value} 
+                    className={selectedWord.find((item) => item.index === index) ? "word selectedWord" :(selectedCells.find((item) => item.index === index) ? "word selectedCells" : "word") } 
                     onClick={()=>handleCellClick(value, index)}
                     >{value}
                 </button>
@@ -136,14 +143,14 @@ const WordSearchGame = () => {
             {(index + 1) % (grid.length/12) === 0 && index !== grid.length - 1 && <br />}
             </React.Fragment>
         ))}
-        <div >
-            {firstLine.map((word, index) => (
-            <p key={index}>{word}</p>
+        <div className="w1" >
+            {firstLine.map((w, index) => (
+            <p key={index} className={submitW.includes(w) ? "cross wordlists": "wordlists"}>{w}</p>
             ))}
         </div>
-        <div>
-            {secondLine.map((word, index) => (
-            <p key={index + 4}>{word}</p>
+        <div className="w2">
+            {secondLine.map((w, index) => (
+            <p key={index + 4} className={submitW.includes(w) ? "cross wordlists": "wordlists"}>{w}</p>
             ))}
         </div>
 
