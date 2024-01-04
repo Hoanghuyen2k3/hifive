@@ -34,7 +34,7 @@ HiFive is a collection of five engaging games developed using ReactJS, Redux, CS
 ## Getting Started
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/hifive.git
+   git clone https://github.com/Hoanghuyen2k3/hifive.git
    ```
 
 2. Install dependencies:
