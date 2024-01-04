@@ -1,4 +1,5 @@
 {
+  "homepage": "http://hoanghuyen2k3.github.io/hifive/",
   "name": "hifive",
   "version": "0.1.0",
   "private": true,
@@ -10,6 +11,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.5.1",
     "fingerpose": "^0.1.0",
+    "gh-pages": "^6.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
@@ -25,6 +27,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
