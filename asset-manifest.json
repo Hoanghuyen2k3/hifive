@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/hifive/static/css/main.86db2656.css",
+    "main.js": "/hifive/static/js/main.9521c90c.js",
+    "static/js/787.ff34ea52.chunk.js": "/hifive/static/js/787.ff34ea52.chunk.js",
+    "static/media/Sweet.mp3": "/hifive/static/media/Sweet.a93486dec96cc8311cad.mp3",
+    "static/media/win.mp3": "/hifive/static/media/win.fd2c2fea27379cbc44da.mp3",
+    "static/media/word.jpg": "/hifive/static/media/word.9262fb64925220eaecf0.jpg",
+    "static/media/puzzle.png": "/hifive/static/media/puzzle.242b6556f1d0b7fcadae.png",
+    "static/media/xo.png": "/hifive/static/media/xo.bbf5deb0b951f1142531.png",
+    "static/media/rock.jpg": "/hifive/static/media/rock.684166196c1d5bb77253.jpg",
+    "static/media/mem.png": "/hifive/static/media/mem.690916c22e2d1f4792bc.png",
+    "index.html": "/hifive/index.html",
+    "main.86db2656.css.map": "/hifive/static/css/main.86db2656.css.map",
+    "main.9521c90c.js.map": "/hifive/static/js/main.9521c90c.js.map",
+    "787.ff34ea52.chunk.js.map": "/hifive/static/js/787.ff34ea52.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.86db2656.css",
+    "static/js/main.9521c90c.js"
+  ]
+}
