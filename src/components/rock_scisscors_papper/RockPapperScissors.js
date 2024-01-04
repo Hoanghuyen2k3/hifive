@@ -33,10 +33,13 @@ function RockPapperScissors() {
   const [com, setCom] = useState(null);
   const [hum, setHum] = useState(null);
   const [start, setStart] = useState(false);
+  const [winner, setWinner] = useState(null);
   const dispatch = useDispatch();
   useEffect(() => {
     let timeoutId;
     if(count === 0){
+      setWinner(determineWinner(hum, name[com]));
+
       setStart(false);
     }
     if (count > 0 && start) {
@@ -50,11 +53,11 @@ function RockPapperScissors() {
       // Cleanup function to clear the timeout when the component is unmounted
       clearTimeout(timeoutId);
     };
-  }, [start, count]);
+  }, [start, count, com, hum, name]);
   
-  const winner = determineWinner(hum, name[com]);
   const status3 = useSelector(selectGame3);
   useEffect(() => {
+    console.log(winner)
     if (winner) {
       dispatch(game3());
     }
@@ -64,9 +67,12 @@ function RockPapperScissors() {
     <div className="rock-game">
       <h1 className="rock-game-h1">Rock Papper Scissors</h1>
       <h2 className="rock-game-h2">Immerse yourself in the interactive world of Rock, Paper, Scissors with our innovative web cam feature! The objective is simple: face off against the computer by showcasing your hand pose—Rock, Paper, or Scissors. As the game kicks off, you have a swift 5 seconds to make your decision, and our web cam will capture your chosen pose. Will you outsmart the computer with the perfect move?</h2>
-      <div>
-        {status3&&<NavLink to="../home">Home</NavLink>}
-      </div>  
+      <div className="redirect">
+            <h1 className="redirect-h1">👉</h1>
+            {
+                status3 && <NavLink className="point-to-home" to="../home"> Game Box </NavLink>
+            }
+        </div>  
         {count ===5 || count === 0 ?
         <button 
           className="rock-start"
@@ -81,8 +87,8 @@ function RockPapperScissors() {
       <div>
         <p className="result">{winner}</p>
         {/* <p>Computer: {name[com]} </p>
-        <h1>{choice[com]}</h1>
-        <p>Human: {hum}</p> */}
+        <h1>{choice[com]}</h1> */}
+        <p>Human: {hum}</p> 
       </div>: <div></div>
         }
 

@@ -43,6 +43,8 @@
     width: 58vw;
     font-weight: normal;
     margin-bottom: 30px;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
 }
   
 .redirect{
@@ -108,6 +110,7 @@
       width: 85vw;
       font-weight: normal;
       margin-bottom: 30px;
+      font-weight: bold;
   }
   .tile {
     width: 100px;

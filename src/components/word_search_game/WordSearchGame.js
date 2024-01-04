@@ -17,6 +17,140 @@ const grid = [
     "Y", "U", "G", "D", "V", "T", "O", "K", "L", "Q", "R", "C", 
     "I", "O", "H", "B", "B", "Q", "P", "Z", "X", "A", "S", "X", 
 ]
+const hintWord =[
+  {
+      "value": "R",
+      "index": 27
+  },
+  {
+      "value": "E",
+      "index": 28
+  },
+  {
+      "value": "A",
+      "index": 29
+  },
+  {
+      "value": "C",
+      "index": 30
+  },
+  {
+      "value": "T",
+      "index": 31
+  },
+  {
+      "value": "J",
+      "index": 17
+  },
+  {
+      "value": "A",
+      "index": 29
+  },
+  {
+      "value": "V",
+      "index": 41
+  },
+  {
+      "value": "A",
+      "index": 53
+  },
+  {
+      "value": "S",
+      "index": 65
+  },
+  {
+      "value": "C",
+      "index": 77
+  },
+  {
+      "value": "R",
+      "index": 89
+  },
+  {
+      "value": "I",
+      "index": 101
+  },
+  {
+      "value": "P",
+      "index": 113
+  },
+  {
+      "value": "T",
+      "index": 125
+  },
+  {
+      "value": "E",
+      "index": 24
+  },
+  {
+      "value": "X",
+      "index": 36
+  },
+  {
+      "value": "P",
+      "index": 48
+  },
+  {
+      "value": "R",
+      "index": 60
+  },
+  {
+      "value": "E",
+      "index": 72
+  },
+  {
+      "value": "S",
+      "index": 84
+  },
+  {
+      "value": "S",
+      "index": 96
+  },
+  {
+      "value": "H",
+      "index": 37
+  },
+  {
+      "value": "T",
+      "index": 50
+  },
+  {
+      "value": "M",
+      "index": 63
+  },
+  {
+      "value": "L",
+      "index": 76
+  },
+  {
+      "value": "C",
+      "index": 45
+  },
+  {
+      "value": "S",
+      "index": 58
+  },
+  {
+      "value": "S",
+      "index": 71
+  },
+  {
+      "value": "N",
+      "index": 0
+  },
+  {
+      "value": "O",
+      "index": 1
+  },
+  {
+      "value": "D",
+      "index": 2
+  },
+  {
+      "value": "E",
+      "index": 3
+  }
+]
 const wordList = [
     'REACT',
     'JAVASCRIPT',
@@ -36,6 +170,8 @@ const WordSearchGame = () => {
   const [selectedCells, setSelectedCells] = useState([]);
   const [word, setWord] = useState('');
   const [submitW, setSubmitW] = useState([]);
+  const [hint, setHint] = useState(false);
+  const [hintW, setHintW] = useState([]);
   
 
   const dispatch = useDispatch();
@@ -113,6 +249,10 @@ const WordSearchGame = () => {
     setWord('');
   };
 
+  useEffect(()=>{
+    hint? setHintW(hintWord):setHintW([]);
+  }, [hint]);
+
   return (
     <div className="word-search">
       <h1 className="wordSearch-h1">Word Search Game</h1>
@@ -128,14 +268,15 @@ const WordSearchGame = () => {
        
         <button className="wordSearch-submit" onClick={submitWord}>Submit Word</button>
       </div>
-      <p>Selected Word: {word}</p>
+      <p className="selectW">Selected Word: {word}</p>
+      <button className="hint-button" onClick={()=> setHint((hint) => !hint)}>💡</button>
       <div className="list">
         
         {grid.map((value, index) => (
             <React.Fragment key={index}>
                 <button 
                     value ={value} 
-                    className={selectedWord.find((item) => item.index === index) ? "word selectedWord" :(selectedCells.find((item) => item.index === index) ? "word selectedCells" : "word") } 
+                    className={selectedWord.find((item) => item.index === index) ? "word selectedWord" :(selectedCells.find((item) => item.index === index) ? "word selectedCells" : (hintW.find((item) => item.index === index)? "word hintWord": "word")) } 
                     onClick={()=>handleCellClick(value, index)}
                     >{value}
                 </button>

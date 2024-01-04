@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'Rubik Doodle Shadow', system-ui;
+    font-weight: bold;
     .word {
         width: 60px;
         height: 60px;
@@ -16,6 +18,9 @@
     }
     .selectedCells {
         background-color: rgb(79, 231, 41);
+    }
+    .hintWord {
+        background-color: rgb(223, 156, 233);
     }
     .cross {
         text-decoration: line-through;
@@ -37,6 +42,12 @@
     width: 58vw;
     font-weight: normal;
     margin-bottom: 30px;
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+.selectW{
+    font-family:'Courier New', Courier, monospace;
+
 }
 
 .redirect{
@@ -61,6 +72,35 @@
     border-radius: 5px;
     
 }
+.hint-button {
+    font-family: 'Rubik Doodle Shadow', system-ui;
+    font-size: clamp(25px, 4vw, 40px);
+    cursor: pointer;
+    position: relative;
+    margin-left: auto;
+    right: 10px;
+    margin-bottom: 20px;
+    border: none;
+    background-color: transparent;
+    color: rgb(230, 118, 137);
+
+}
+
+/* Hidden hint text */
+.hint-button::after {
+    content: "Hint";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  /* Show hint text on button hover */
+  .hint-button:hover::after {
+    opacity: 1;
+  }
 
 @keyframes blinking{
     0%{   color: rgb(255, 251, 0);   }
@@ -100,6 +140,8 @@
         width: 85vw;
         font-weight: normal;
         margin-bottom: 30px;
+        font-weight: bold;
+
     }
 }
 
